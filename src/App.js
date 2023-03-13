@@ -37,8 +37,11 @@ function App() {
         setExpenses((prevExpenses) => {
             return [expense, ...prevExpenses]
         })
+        console.log('Append List', expense)
     }
-
+    
+    console.log('Expenses List', expenses)
+    
     return (
         <div>
             <NewExpense onAddExpense={addExpenseHandler} />

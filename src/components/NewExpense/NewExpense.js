@@ -8,8 +8,8 @@ const NewExpense = (props) => {
             ...enteredExpenseData,
             id: Math.random().toString(),
         }
+        //console.log('추가한 데이터', expenseData)
         props.onAddExpense(expenseData)
-        //console.log(expenseData)
     }
 
     return (

@@ -10,9 +10,9 @@ const ExpenseForm = (props) => {
     */
 
     const [userInput, setUserInput] = useState({
-        enteredTitle: "",
-        enteredAmount: "",
-        enteredDate: "",
+        title: "",
+        amount: "",
+        date: "",
     })
 
     const titleChangeHandler = (event) => {
@@ -27,7 +27,7 @@ const ExpenseForm = (props) => {
         */
         // 방법 3. 항상 최신의 스냅샷에서 작업하도록 하는 안전한 방법
         setUserInput((prevState) => {
-            return { ...prevState, enteredTitle: event.target.value }
+            return { ...prevState, title: event.target.value }
         })
     }
 
@@ -41,7 +41,7 @@ const ExpenseForm = (props) => {
         })
         */
         setUserInput((prevState) => {
-            return { ...prevState, enteredAmount: event.target.value }
+            return { ...prevState, amount: event.target.value }
         })
     }
 
@@ -54,8 +54,9 @@ const ExpenseForm = (props) => {
             enteredDate : event.target.value
         })
         */
+        const selectedDate = new Date(event.target.value)
         setUserInput((prevState) => {
-            return { ...prevState, enteredDate: event.target.value }
+            return { ...prevState, date: selectedDate }
         })
     }
 
@@ -65,10 +66,11 @@ const ExpenseForm = (props) => {
 
         props.onSaveExpenseData(expenseData)
         setUserInput({
-            enteredTitle: "",
-            enteredAmount: "",
-            enteredDate: "",
+            title: "",
+            amount: "",
+            date: "",
         })
+        console.log(userInput)
     }
 
     return (
