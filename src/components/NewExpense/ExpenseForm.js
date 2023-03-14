@@ -3,21 +3,22 @@ import { useState } from "react"
 import "./ExpenseForm.css"
 
 const ExpenseForm = (props) => {
-    /*
-    const [enterdTitle, setEnteredTitle] = useState('')
-    const [enterdAmount, setEnteredAmount] = useState('')
-    const [enterdDate, setEnterdDate] = useState('')
-    */
 
+    const [enteredTitle, setEnteredTitle] = useState('')
+    const [enteredAmount, setEnteredAmount] = useState('')
+    const [enteredDate, setEnteredDate] = useState('')
+
+    /*
     const [userInput, setUserInput] = useState({
         title: "",
         amount: "",
-        date: "",
+        date: ""
     })
+    */
 
     const titleChangeHandler = (event) => {
         // 방법 1.
-        //setEnteredTitle(event.target.value)
+        setEnteredTitle(event.target.value)
         //console.log('title :', enterdTitle)
         /* 방법 2.
         setUserInput({
@@ -26,13 +27,15 @@ const ExpenseForm = (props) => {
         })
         */
         // 방법 3. 항상 최신의 스냅샷에서 작업하도록 하는 안전한 방법
+        /*
         setUserInput((prevState) => {
             return { ...prevState, title: event.target.value }
         })
+        */
     }
 
     const amountChangeHandler = (event) => {
-        //setEnteredAmount(event.target.value)
+        setEnteredAmount(event.target.value)
         //console.log('amount :', enterdAmount)
         /*
         setUserInput({
@@ -40,13 +43,15 @@ const ExpenseForm = (props) => {
             enteredAmount : event.target.value
         })
         */
+       /*
         setUserInput((prevState) => {
             return { ...prevState, amount: event.target.value }
         })
+        */
     }
 
     const dateChangeHandler = (event) => {
-        //setEnterdDate(event.target.value)
+        setEnteredDate(event.target.value)
         //console.log('date :', enterdDate)
         /*
         setUserInput({
@@ -54,23 +59,35 @@ const ExpenseForm = (props) => {
             enteredDate : event.target.value
         })
         */
+       /*
         const selectedDate = new Date(event.target.value)
         setUserInput((prevState) => {
             return { ...prevState, date: selectedDate }
         })
+        */
     }
 
     const submitHandler = (event) => {
         event.preventDefault()
-        const expenseData = userInput
+        //const expenseData = userInput
+
+        const expenseData = {
+            title : enteredTitle,
+            amount : enteredAmount,
+            date : new Date(enteredDate)
+        }
 
         props.onSaveExpenseData(expenseData)
+        setEnteredTitle('');
+        setEnteredAmount('');
+        setEnteredDate('');
+        /*
         setUserInput({
-            title: "",
-            amount: "",
-            date: "",
+            enteredTitle: "",
+            enteredAmount: "",
+            enteredDate: "",
         })
-        console.log(userInput)
+        */
     }
 
     return (
@@ -80,7 +97,7 @@ const ExpenseForm = (props) => {
                     <label>Title</label>
                     <input
                         type="text"
-                        value={userInput.enteredTitle}
+                        value={enteredTitle}
                         onChange={titleChangeHandler}
                     />
                 </div>
@@ -91,7 +108,7 @@ const ExpenseForm = (props) => {
                         type="number"
                         min="0.01"
                         step="0.01"
-                        value={userInput.enteredAmount}
+                        value={enteredAmount}
                         onChange={amountChangeHandler}
                     />
                 </div>
@@ -102,7 +119,7 @@ const ExpenseForm = (props) => {
                         type="date"
                         min="2019-01-01"
                         step="2025-12-31"
-                        value={userInput.enteredDate}
+                        value={enteredDate}
                         onChange={dateChangeHandler}
                     />
                 </div>
