@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react"
 
-import Login from './components/Login/Login';
-import Home from './components/Home/Home';
-import MainHeader from './components/MainLayout/MainHeader';
+import Login from "./components/Login/Login"
+import Home from "./components/Home/Home"
+import MainHeader from "./components/MainLayout/MainHeader"
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const loginHandler = (email, password) => {
-    // We should of course check email and password
-    // But it's just a dummy/ demo anyways
+    useEffect(() => {
+        const storedUserLocalStorage = localStorage.getItem("isLoggedIn")
 
-    localStorage.setItem('isLoggedIn', 1)
-    setIsLoggedIn(true);
-  };
+        if (storedUserLocalStorage === "1") {
+            setIsLoggedIn(true)
+        }
+    }, [])
+    const loginHandler = (email, password) => {
+        // We should of course check email and password
+        // But it's just a dummy/ demo anyways
 
-  const logoutHandler = () => {
-    setIsLoggedIn(false);
-  };
+        localStorage.setItem("isLoggedIn", 1)
+        setIsLoggedIn(true)
+    }
 
-  return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-      <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
-      </main>
-    </React.Fragment>
-  );
+    const logoutHandler = () => {
+      localStorage.removeItem('isLoggedIn')
+        setIsLoggedIn(false)
+    }
+
+    return (
+        <React.Fragment>
+            <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+            <main>
+                {!isLoggedIn && <Login onLogin={loginHandler} />}
+                {isLoggedIn && <Home onLogout={logoutHandler} />}
+            </main>
+        </React.Fragment>
+    )
 }
 
-export default App;
+export default App
