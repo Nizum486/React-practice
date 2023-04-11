@@ -98,7 +98,6 @@ const Login = (props) => {
         event.preventDefault()
         props.onLogin(emailState.value, passwordState.value)
     }
-
     return (
         <React.Fragment>
             <Card className={classes.login}>
