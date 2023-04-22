@@ -1,9 +1,15 @@
+import { Fragment } from "react"
+
+import Header from "./components/Layout/Header"
+import Footer from "./components/Layout/Footer"
+
 function App() {
-  return (
-    <div>
-      <h2>Let's get started!</h2>
-    </div>
-  );
+    return (
+        <Fragment>
+            <Header />
+            <Footer />
+        </Fragment>
+    )
 }
 
-export default App;
+export default App
